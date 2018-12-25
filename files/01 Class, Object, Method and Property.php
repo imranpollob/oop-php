@@ -2,7 +2,6 @@
 // Declare the class
 class Car
 {
- 
     // properties
     public $comp;
     public $color = 'beige';

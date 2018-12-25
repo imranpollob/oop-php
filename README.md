@@ -216,3 +216,86 @@ $sportsCar1->setModel('Mercedes Benz');
 //Get the class model name
 echo $sportsCar1->hello();
 ```
+
+### Override
+
+```php
+<?php
+// The parent class has hello method that returns "beep".
+class Car
+{
+    // Child class can override this method
+    public function hello()
+    {
+        return "beep";
+    }
+
+    // Prevents the child class from overriding
+    final public function tryToOverride()
+    {
+        return "try hard";
+    }
+}
+   
+// The child class has hello method that returns "Hallo"
+class SportsCar extends Car
+{
+    public function hello()
+    {
+        return "Hallo";
+    }
+
+    // This code will throw PHP Fatal error: "Cannot override"
+    // public function tryToOverride()
+    // {
+    //     return "trying for lifetime";
+    // }
+}
+      
+// Create a new object
+$sportsCar1 = new SportsCar();
+
+// Get the result of the hello method
+echo $sportsCar1->hello();
+```
+
+### Abstruct Class and Method
+
+```php
+<?php
+// Abstract classes are declared with the abstract keyword, and contain abstract methods.
+abstract class Car
+{
+    // Abstract classes can have properties
+    protected $tankVolume;
+   
+    // Abstract classes can have non abstract methods
+    public function setTankVolume($volume)
+    {
+        $this->tankVolume = $volume;
+    }
+   
+    // Abstract method
+    abstract public function calcNumMilesOnFullTank();
+}
+
+class Toyota extends Car
+{
+    // Since we inherited abstract method, we need to define it in the child class, 
+    // by adding code to the method's body.
+    public function calcNumMilesOnFullTank()
+    {
+        return $miles = $this->tankVolume * 33;
+    }
+
+    public function getColor()
+    {
+        return "beige";
+    }
+}
+
+$toyota1 = new Toyota();
+$toyota1->setTankVolume(10);
+echo $toyota1->calcNumMilesOnFullTank();//330
+echo $toyota1->getColor();//beige
+```
