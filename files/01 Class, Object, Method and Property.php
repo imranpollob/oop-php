@@ -1,6 +1,3 @@
-### Class, Object, Method and Property
-
-```php
 <?php
 // Declare the class
 class Car {
@@ -46,6 +43,3 @@ echo "<hr />";
 echo $bmw -> hello(); // beep
 echo "<br />";
 echo $mercedes -> hello(); // beep
-```
-
-### 
