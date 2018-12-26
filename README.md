@@ -1,9 +1,9 @@
 ### Class, Object, Method and Property
 
-Class is like a blueprint like Car design from which Object can be created.
-Object is instance of the Class like BMW is an instance of Car.
-Functions inside a class are called Methods.
-Variables inside a class are called Properties.
+- Class is like a blueprint like Car design from which Object can be created.
+- Object is instance of the Class like BMW is an instance of Car.
+- Functions inside a class are called Methods.
+- Variables inside a class are called Properties.
 
 ```php
 <?php
@@ -55,7 +55,7 @@ echo $mercedes->hello(); // beep
 
 ### $this keyword
 
-$this keyword indicates own class. Own methods and properties can be accessed through $this keyword.
+- $this keyword indicates own class. Own methods and properties can be accessed through $this keyword.
 
 ```php
 <?php
@@ -98,7 +98,7 @@ echo $mercedes->hello();
 
 ### Method Chaining
 
-When a Class's Methods returns $this keyword, then can be chained together.
+- When a Class's Methods returns $this keyword, then can be chained together.
 
 ```php
 <?php
@@ -139,13 +139,11 @@ echo "The number of gallons left in the tank: " . $tank . " gal.";
 
 ### Access Modifier
 
-Access modifiers add Encapsulation to class properties and methods,
-that means it declares the visibility of the properties and methods.
-
-Access modifiers are Public, Private and Protected.
-Public modifier allows a code from outside or inside the class to access the class's methods and properties.
-Private modifier prevents access to a class's methods or properties from any code that is outside the class.
-Protected modifier, which allows code usage from both inside the class and from its child classes.
+- Access modifiers add Encapsulation to class properties and methods, that means it declares the visibility of the properties and methods.
+- Access modifiers are Public, Private and Protected.
+- Public modifier allows a code from outside or inside the class to access the class's methods and properties.
+- Private modifier prevents access to a class's methods or properties from any code that is outside the class.
+- Protected modifier, which allows code usage from both inside the class and from its child classes.
 
 ```php
 <?php
@@ -176,11 +174,8 @@ echo $mercedes->getModel();
 
 ### Magic Method and Constant
 
-The "magic" methods are ones with special names, starting with two underscores, 
-which denote methods which will be triggered in response to particular PHP events.
-
-PHP provide a set of special predefined constants that change depending on where they are used.
-These constants are called magic constants, begin and end with two underscores.
+- The "magic" methods are ones with special names, starting with two underscores, which denote methods which will be triggered in response to particular PHP events.
+- PHP provides a set of special predefined constants that change depending on where they are used. These constants are called magic constants, begin and end with two underscores.
 
 ```php
 <?php
@@ -211,8 +206,7 @@ echo $car1->getCarModel();
 
 ## Inheritence
 
-In inheritance, we have a parent class with its own methods and properties,
-and a child class (or classes) that can use the code from the parent. 
+- In inheritance, we have a parent class with its own methods and properties, and a child class (or classes) that can use the code from the parent. 
 
 ```php
 <?php
@@ -252,11 +246,8 @@ echo $sportsCar1->hello();
 
 ### Override
 
-Child class can have its own properties and methods same as parent,
-it can override the properties and methods of the parent class.
-
-In order to prevent the method in the child class from overriding the parent’s methods,
-we can prefix the method in the parent with the **final** keyword.
+- Child class can have its own properties and methods same as parent, it can override the properties and methods of the parent class.
+- In order to prevent the method in the child class from overriding the parent’s methods, we can prefix the method in the parent with the **final** keyword.
 
 ```php
 <?php
@@ -300,6 +291,12 @@ echo $sportsCar1->hello();
 
 ### Abstruct Class and Method
 
+- An abstract class is a class that contains at least one abstract method, which is a method without any actual code in it, just the name and the parameters, and that has been marked as "abstract".
+- The purpose of this is to provide a kind of template to inherit from and to force the inheriting class to implement the abstract methods. 
+- When inheriting from an abstract class, all methods marked abstract in the parent's class declaration must be defined by the child; additionally, these methods must be defined with the same (or a less restricted) visibility. For example, if the abstract method is defined as protected, the function implementation must be defined as either protected or public, but not private
+- An abstract class can not be instantiated with new keyword
+- An abstract class thus is something between a regular class and a pure interface.
+
 ```php
 <?php
 // Abstract classes are declared with the abstract keyword, and contain abstract methods.
@@ -340,6 +337,12 @@ echo $toyota1->getColor();//beige
 ```
 
 ### Interface
+
+- Also interfaces are a special case of abstract classes where ALL methods are abstract (blank body).
+- A class can implements (not extends) more than one interface, thereby, we can simulate multiple inheritances in PHP.
+- Implementing a inteface ensures that all functions inside the interface is implemented by the class
+- An interface can extend another interface and thereby it inherits all functions declared with this interface.
+- Interfaces can have constants, but not properties 
 
 ```php
 <?php
@@ -394,6 +397,9 @@ class miniCar implements Car, Vehicle
 
 ### Polymorphism
 
+- Polymorphism represent more than one form, it can be achieved using method overloading and method overriding. This is an object oriented concept where same function can be used for different purposes. For example function name will remain same but it make take different number of arguments (overloading) and can do different task (overriding).
+- PHP doesn't support traditional method overloading, however one way you might be able to achieve what you want, would be to make use of the __call magic method.
+
 ```php
 <?php
 // According to the Polymorphism principle, methods in 
@@ -445,6 +451,8 @@ echo $rect->calcArea();
 ```
 
 ### Type Hinting
+
+- With Type hinting we can specify the expected data type (arrays, objects, interface, etc.) for an argument in a function declaration.
 
 ```php
 <?php
@@ -506,6 +514,8 @@ $car1->setPrice(1234.56);
 
 ### Static Method and Property
 
+- Sometimes, it is useful if we can access methods and properties in the context of a class rather than via creating an object. To do this, we can use **static** keyword.
+
 ```php
 <?php
 
@@ -532,6 +542,10 @@ echo Utilis::$numCars;
 ```
 
 ### Trait
+
+- A Trait is simply a group of methods that you want include within another class.
+- Traits is a mechanism for code reuse in single inheritance languages such as PHP. A Trait is intended to reduce some limitations of single inheritance by enabling a developer to reuse sets of methods freely in several independent classes living in different class hierarchies.
+- A Trait, like an abstract class, cannot be instantiated on it’s own
 
 ```php
 <?php
