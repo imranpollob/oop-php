@@ -7,7 +7,7 @@ OOP in a nutshell in PHP
 - [Method Chaining](#method-chaining)
 - [Access Modifier](#access-modifier)
 - [Magic Method and Constant](#magic-method-and-constant)
-- [Inheritence](#inheritence)
+- [Inheritance](#inheritance)
 - [Override](#override)
 - [Abstract Class and Method](#abstract-class-and-method)
 - [Interface](#interface)
@@ -222,7 +222,7 @@ $car1 = new Car('Mercedes');
 echo $car1->getCarModel();
 ```
 
-## Inheritence
+## Inheritance
 
 - In inheritance, we have a parent class with its own methods and properties, and a child class (or classes) that can use the code from the parent. 
 
@@ -358,7 +358,7 @@ echo $toyota1->getColor();//beige
 
 - Also interfaces are a special case of abstract classes where ALL methods are abstract (blank body).
 - A class can implements (not extends) more than one interface, thereby, we can simulate multiple inheritances in PHP.
-- Implementing a inteface ensures that all functions inside the interface is implemented by the class
+- Implementing a interface ensures that all functions inside the interface is implemented by the class
 - An interface can extend another interface and thereby it inherits all functions declared with this interface.
 - Interfaces can have constants, but not properties 
 
