@@ -1,3 +1,18 @@
+## Table of Contents
+- [Class, Object, Method and Property](#class-object-method-and-property)
+- [$this keyword](#this-keyword)
+- [Method Chaining](#method-chaining)
+- [Access Modifier](#access-modifier)
+- [Magic Method and Constant](#magic-method-and-constant)
+- [Inheritence](#inheritence)
+- [Override](#override)
+- [Abstruct Class and Method](#abstruct-class-and-method)
+- [Interface](#interface)
+- [Polymorphism](#polymorphism)
+- [Type Hinting](#type-hinting)
+- [Static Method and Property](#static-method-and-property)
+- [Trait](#trait)
+
 ### Class, Object, Method and Property
 
 - Class is like a blueprint like Car design from which Object can be created.
