@@ -9,7 +9,7 @@ OOP in a nutshell in PHP
 - [Magic Method and Constant](#magic-method-and-constant)
 - [Inheritence](#inheritence)
 - [Override](#override)
-- [Abstruct Class and Method](#abstruct-class-and-method)
+- [Abstract Class and Method](#abstract-class-and-method)
 - [Interface](#interface)
 - [Polymorphism](#polymorphism)
 - [Type Hinting](#type-hinting)
@@ -307,7 +307,7 @@ $sportsCar1 = new SportsCar();
 echo $sportsCar1->hello();
 ```
 
-### Abstruct Class and Method
+### Abstract Class and Method
 
 - An abstract class is a class that contains at least one abstract method, which is a method without any actual code in it, just the name and the parameters, and that has been marked as "abstract".
 - The purpose of this is to provide a kind of template to inherit from and to force the inheriting class to implement the abstract methods. 
