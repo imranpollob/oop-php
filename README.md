@@ -1,23 +1,28 @@
 ### Class, Object, Method and Property
 
+Class is like a blueprint like Car design from which Object can be created.
+Object is instance of the Class like BMW is an instance of Car.
+Functions inside a class are called Methods.
+Variables inside a class are called Properties.
+
 ```php
 <?php
 // Declare the class
 class Car
 {
-    // properties
+    // Properties
     public $comp;
     public $color = 'beige';
     public $hasSunRoof = true;
  
-    // method that says hello
+    // Method that says hello
     public function hello()
     {
         return "beep";
     }
 }
  
-// Create an instance
+// Create an instance with new keyword
 $bmw = new Car();
 $mercedes = new Car();
  
@@ -50,6 +55,8 @@ echo $mercedes->hello(); // beep
 
 ### $this keyword
 
+$this keyword indicates own class. Own methods and properties can be accessed through $this keyword.
+
 ```php
 <?php
 
@@ -57,14 +64,21 @@ class Car
 {
     // The properties
     public $comp;
-    public $color = 'beige';
+    public $color = 'red';
     public $hasSunRoof = true;
 
     // The method that says hello
     public function hello()
     {
-        return "Beep I am a <i>" . $this->comp .
-            "</i>, and I am <i>" . $this->color;
+        // accessing own properties and methods using $this
+        return "Beep, I am a " . $this->comp .
+            ", and my color is" . $this->color.
+            ". I am created at " . $this->model() . ".";
+    }
+
+    public function model()
+    {
+        return date('Y');
     }
 }
 
@@ -77,11 +91,14 @@ $bmw->color = 'blue';
 $bmw->comp = "BMW";
 $mercedes->comp = "Mercedes Benz";
 
-// Call the hello method for the $bmw object.
+// Call the hello method.
 echo $bmw->hello();
+echo $mercedes->hello();
 ```
 
 ### Method Chaining
+
+When a Class's Methods returns $this keyword, then can be chained together.
 
 ```php
 <?php
@@ -103,7 +120,7 @@ class Car
     {
         $miles = $float;
         $gallons = $miles / 50;
-        $this->tank -= ($gallons);
+        $this->tank -= $gallons;
 
         return $this;
     }
@@ -122,15 +139,23 @@ echo "The number of gallons left in the tank: " . $tank . " gal.";
 
 ### Access Modifier
 
+Access modifiers add Encapsulation to class properties and methods,
+that means it declares the visibility of the properties and methods.
+
+Access modifiers are Public, Private and Protected.
+Public modifier allows a code from outside or inside the class to access the class's methods and properties.
+Private modifier prevents access to a class's methods or properties from any code that is outside the class.
+Protected modifier, which allows code usage from both inside the class and from its child classes.
+
 ```php
 <?php
 
 class Car
 {
-    //the private access modifier denies access to the method from outside the class’s scope
+    // Private access modifier denies access to the property and method from outside the class’s scope
     private $model;
  
-    //the public access modifier allows the access to the method from outside the class
+    // Public access modifier allows the access from outside the class
     public function setModel($model)
     {
         $this->model = $model;
@@ -151,6 +176,12 @@ echo $mercedes->getModel();
 
 ### Magic Method and Constant
 
+The "magic" methods are ones with special names, starting with two underscores, 
+which denote methods which will be triggered in response to particular PHP events.
+
+PHP provide a set of special predefined constants that change depending on where they are used.
+These constants are called magic constants, begin and end with two underscores.
+
 ```php
 <?php
 
@@ -158,7 +189,7 @@ class Car
 {
     private $model = '';
   
-    //__construct magic method
+    // __construct magic method
     public function __construct($model = null)
     {
         if ($model) {
@@ -168,7 +199,7 @@ class Car
 
     public function getCarModel()
     {
-        //We use the __CLASS__ magic constant in order to get the class name
+        // We use the __CLASS__ magic constant in order to get the class name
         return " The <b>" . __class__ . "</b> model is: " . $this->model;
     }
 }
@@ -180,16 +211,19 @@ echo $car1->getCarModel();
 
 ## Inheritence
 
+In inheritance, we have a parent class with its own methods and properties,
+and a child class (or classes) that can use the code from the parent. 
+
 ```php
 <?php
 // The parent class
 class Car
 {
-    //The $model property is protected, so it can be accessed 
+    // The $model property is protected, so it can be accessed 
     // from within the class and its child classes
     protected $model;
    
-    //Public setter method
+    // Public setter method
     public function setModel($model)
     {
         $this->model = $model;
@@ -201,22 +235,28 @@ class SportsCar extends Car
 {
     public function hello()
     {
-        //Has no problem to get a protected property that belongs to the parent
+        // Has no problem to get a protected property that belongs to the parent
         return "beep! I am a <i>" . $this->model . "</i><br />";
     }
 }
   
-//Create an instance from the child class
+// Create an instance from the child class
 $sportsCar1 = new SportsCar();
   
-//Set the class model name
+// Set the class model name
 $sportsCar1->setModel('Mercedes Benz');
   
-//Get the class model name
+// Get the class model name
 echo $sportsCar1->hello();
 ```
 
 ### Override
+
+Child class can have its own properties and methods same as parent,
+it can override the properties and methods of the parent class.
+
+In order to prevent the method in the child class from overriding the parent’s methods,
+we can prefix the method in the parent with the **final** keyword.
 
 ```php
 <?php

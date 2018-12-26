@@ -4,7 +4,7 @@ class Car
 {
     private $model = '';
   
-    //__construct magic method
+    // __construct magic method
     public function __construct($model = null)
     {
         if ($model) {
@@ -14,7 +14,7 @@ class Car
 
     public function getCarModel()
     {
-        //We use the __CLASS__ magic constant in order to get the class name
+        // We use the __CLASS__ magic constant in order to get the class name
         return " The <b>" . __class__ . "</b> model is: " . $this->model;
     }
 }

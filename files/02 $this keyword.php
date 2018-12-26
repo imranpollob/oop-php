@@ -4,14 +4,21 @@ class Car
 {
     // The properties
     public $comp;
-    public $color = 'beige';
+    public $color = 'red';
     public $hasSunRoof = true;
 
     // The method that says hello
     public function hello()
     {
-        return "Beep I am a <i>" . $this->comp .
-            "</i>, and I am <i>" . $this->color;
+        // accessing own properties and methods using $this
+        return "Beep, I am a " . $this->comp .
+            ", and my color is" . $this->color.
+            ". I am created at " . $this->model() . ".";
+    }
+
+    public function model()
+    {
+        return date('Y');
     }
 }
 
@@ -24,5 +31,6 @@ $bmw->color = 'blue';
 $bmw->comp = "BMW";
 $mercedes->comp = "Mercedes Benz";
 
-// Call the hello method for the $bmw object.
+// Call the hello method.
 echo $bmw->hello();
+echo $mercedes->hello();
