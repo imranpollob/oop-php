@@ -70,6 +70,7 @@ echo $bmw->hello(); // beep
 echo "<br />";
 echo $mercedes->hello(); // beep
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### $this keyword
 
@@ -113,6 +114,7 @@ $mercedes->comp = "Mercedes Benz";
 echo $bmw->hello();
 echo $mercedes->hello();
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Method Chaining
 
@@ -154,6 +156,7 @@ $tank = $bmw->fill(10)->ride(40)->tank;
 // Print the results to the screen.
 echo "The number of gallons left in the tank: " . $tank . " gal.";
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Access Modifier
 
@@ -189,6 +192,7 @@ $mercedes->setModel("Mercedes benz");
 //Gets the car’s model
 echo $mercedes->getModel();
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Magic Method and Constant
 
@@ -221,6 +225,7 @@ $car1 = new Car('Mercedes');
 
 echo $car1->getCarModel();
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ## Inheritance
 
@@ -261,6 +266,7 @@ $sportsCar1->setModel('Mercedes Benz');
 // Get the class model name
 echo $sportsCar1->hello();
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Override
 
@@ -306,6 +312,7 @@ $sportsCar1 = new SportsCar();
 // Get the result of the hello method
 echo $sportsCar1->hello();
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Abstract Class and Method
 
@@ -353,6 +360,7 @@ $toyota1->setTankVolume(10);
 echo $toyota1->calcNumMilesOnFullTank();//330
 echo $toyota1->getColor();//beige
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Interface
 
@@ -412,6 +420,7 @@ class miniCar implements Car, Vehicle
     }
 }
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Polymorphism
 
@@ -467,6 +476,7 @@ $rect = new Rectangle(3, 4);
 echo $circ->calcArea();
 echo $rect->calcArea();
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Type Hinting
 
@@ -529,6 +539,7 @@ $car1->setHasSunRoof(true);
 $car1->setNumberOfDoors(4);
 $car1->setPrice(1234.56);
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Static Method and Property
 
@@ -558,6 +569,7 @@ echo Utilis::$numCars;
 Utilis::addToNumCars(-1);
 echo Utilis::$numCars;
 ```
+[🔝 Back to contents](#table-of-contents)
 
 ### Trait
 
@@ -600,3 +612,4 @@ $o->sayHello();
 $o->sayWorld();
 $o->sayExclamationMark();
 ```
+[🔝 Back to contents](#table-of-contents)
