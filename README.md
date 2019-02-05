@@ -15,6 +15,22 @@ OOP in a nutshell in PHP
 - [Type Hinting](#type-hinting)
 - [Static Method and Property](#static-method-and-property)
 - [Trait](#trait)
+- [All magic methods overview](#all-magic-methods-overview)
+    - [__construct](#__construct)
+    - [__destruct](#__destruct)
+    - [__call](#__call)
+    - [__callStatic](#__callStatic)
+    - [__get](#__get)
+    - [__set](#__set)
+    - [__isset](#__isset)
+    - [__unset](#__unset)
+    - [__sleep](#__sleep)
+    - [__wakeup](#__wakeup)
+    - [__toString](#__toString)
+    - [__invoke](#__invoke)
+    - [__set_state](#__set_state)
+    - [__debuginfo](#__debuginfo)
+    - [__clone](#__clone)
 
 ### Class, Object, Method and Property
 
@@ -225,6 +241,8 @@ $car1 = new Car('Mercedes');
 
 echo $car1->getCarModel();
 ```
+[⏬ All magic methods overview](#all-magic-methods-overview)
+
 [🔝 Back to contents](#table-of-contents)
 
 ## Inheritance
@@ -611,5 +629,273 @@ $o = new MyHelloWorld();
 $o->sayHello();
 $o->sayWorld();
 $o->sayExclamationMark();
+```
+[🔝 Back to contents](#table-of-contents)
+
+### All Magic Methods Overview
+
+### __construct
+- The PHP constructor is the first method that is automatically called after the object is created.
+- Each class has a constructor. If you do not explicitly declare it, then there will be a default constructor with no parameters and empty content in the class.
+- Constructors are usually used to perform some initialization tasks, such as setting initial values ​​for member variables when creating objects.
+- Parent constructors are not called implicitly if the child class defines a constructor. In order to run a parent constructor, a call to parent::__construct() within the child constructor is required. If the child does not define a constructor then it may be inherited from the parent class just like a normal class method (if it was not declared as private)
+
+### __destruct
+- Destructor is the opposite of constructor.
+The destructor method will be called as soon as there are no other references to a particular object, or in any order during the shutdown sequence.
+- Destructor allows you to perform some operations before destroying an object, such as closing a file, emptying a result set, and so on.
+- In general, the destructor is not very common in PHP. It's an optional part of a class, usually used to complete some cleanup tasks before the object is destroyed.
+- Like constructors, parent destructors will not be called implicitly by the engine. In order to run a parent destructor, one would have to explicitly call parent::__destruct() in the destructor body. Also like constructors, a child class may inherit the parent's destructor if it does not implement one itself.
+
+### __call
+- Triggered when invoking inaccessible methods in an object context, simply when method is not found in that class
+- This method takes two parameters. The first parameter $name argument is the name of the method being called and the second $arguments will receive multiple arguments of the method as an array.
+
+### __callStatic
+- Triggered when invoking inaccessible methods in a static context, simply when static method is not found in that class
+- This method takes two parameters. The first parameter $name argument is the name of the method being called and the second $arguments will receive multiple arguments of the method as an array.
+
+### __get
+- We can use the magic method __get() to access a private property of an external object
+
+### __set
+- It is used to set the private property of the object.
+- When an undefined property is assigned, the __set() method will be triggered and the passed parameters are the property name and value that are set.
+
+### __isset
+- It is triggered when we call isset() or empty() on inaccessible properties
+
+### __unset
+- It is triggered when we call unset() on inaccessible properties
+
+### __sleep
+- The serialize() method will check if there is a magic method __sleep() in the class. If it exists, the method will be called first and then perform the serialize operation.
+- The __sleep() method is often used to specify the properties that need to be serialized before saving data. If there are some very large objects that don't need to be saved all, then you will find this feature is very useful.
+- It is supposed to return an array with the names of all variables of that object that should be serialized. If the method doesn't return anything then NULL is serialized and E_NOTICE is issued.
+- It is not possible for __sleep() to return names of private properties in parent classes
+
+### __wakeup
+- In contrast to the __sleep() method, the __wakeup() method is often used in deserialize operations, such as re-building a database connection, or performing other initialization operations.
+- This will invoke destruct method internally
+
+### __toString
+- The __toString() method will be called when using echo method to print an object directly.
+- This method must return a string, otherwise it will throw a fatal error.
+
+### __invoke
+- This method is called when a we try to call an object as a function.
+
+### __set_state
+- This static method is called for classes exported by var_export()
+- The only parameter of this method is an array containing exported properties in the form array('property' => value, ...).
+
+### __debuginfo
+- This method is called by var_dump() when dumping an object to get the properties that should be shown.
+- If the method isn't defined on an object, then all public, protected and private properties will be shown.
+
+### __clone
+- An object copy is created by using the clone keyword (which calls the object's __clone() method if possible). 
+- An object's __clone() method cannot be called directly.
+- When an object is cloned, PHP will perform a shallow copy of all of the object's properties. Any properties that are references to other variables will remain references.
+- Once the cloning is complete, if a __clone() method is defined, then the newly created object's __clone() method will be called, to allow any necessary properties that need to be changed.
+
+
+```php
+<?php
+// We are implementing Serializable only for testing serialize() and unserialize()
+class Car implements Serializable
+{
+    public $name;
+    private $hidden = 'Serect';
+
+    // __construct ([ mixed $args = "" [, $... ]] ) : void
+    function __construct($name = null)
+    {
+        $this->name = $name;
+        echo ("Constructor is called\n");
+    }
+
+    public function say()
+    {
+        echo "My name is $this->name\n";
+    }
+
+    // __destruct ( void ) : void
+    function __destruct()
+    {
+        echo "Destroying " . __class__ . "\n";
+    }
+
+    // public __call ( string $name , array $arguments ) : mixed
+    public function __call($name, $arguments)
+    {
+        echo "Calling object method '$name', Arguments: " . implode(', ', $arguments) . "\n";
+    }
+
+    // public static __callStatic ( string $name , array $arguments ) : mixed
+    public static function __callStatic($name, $arguments)
+    {
+        echo "Calling static method '$name', Arguments: " . implode(', ', $arguments) . "\n";
+    }
+
+    // public __set ( string $name , mixed $value ) : void
+    public function __set($name, $value)
+    {
+        echo "Setting '$name' to '$value'\n";
+        $this->$name = $value;
+    }
+
+    // public __get ( string $name ) : mixed
+    public function __get($name)
+    {
+        echo "Getting '$name'\n";
+        return $this->$name;
+    }
+
+    // public __isset ( string $name ) : bool
+    public function __isset($name)
+    {
+        echo "Is '$name' set?\n";
+        return isset($this->$name);
+    }
+
+    // public __unset ( string $name ) : void
+    public function __unset($name)
+    {
+        echo "Unsetting '$name'\n";
+        unset($this->$name);
+    }
+
+    // public __sleep ( void ) : array
+    public function __sleep()
+    {
+        echo "It is invoked because serialize() method is invoked outside the class\n";
+        $this->name = base64_encode($this->name);
+        // should return an array
+        return array('name');
+    }
+
+    public function __wakeup()
+    {
+        echo "It is invoked when the unserialize() method is invoked outside the class.<br>";
+        $this->name = 'Mr. Bean';
+        // There is no need to return an array here.
+    }
+
+    // Serializable interface method
+    public function serialize()
+    {
+        return serialize('hello world');
+    }
+    
+    // Serializable interface method
+    public function unserialize($serialized)
+    {
+        $this->name = unserialize($serialized);
+    }
+
+    // public __toString ( void ) : string
+    public function __toString()
+    {
+        return "Beautiful Car\n";
+    }
+
+    // __invoke ([ $... ] ) : mixed
+    public function __invoke($x = true)
+    {
+        var_dump($x);
+    }
+
+    // static __set_state ( array $properties ) : object
+    public static function __set_state($an_array)
+    {
+        $obj = new Car;
+        $obj->name = $an_array["name"];
+
+        return $obj;
+    }
+
+    // __debugInfo ( void ) : array
+    public function __debugInfo()
+    {
+        return ['name' => 'Debug Name'];
+    }
+
+    // __clone ( void ) : void
+    public function __clone()
+    {
+        echo "You are cloning the object\n";
+    }
+
+}
+
+// __construct is invoked
+$bmw = new Car('X1');
+// say() method from class is invoked
+$bmw->say();
+// class has no method names runTest() so __call is invoked
+$bmw->runTest('Hi', 123);
+// class has no static method names runTest() so __callStatic is invoked
+Car::runTest('Hello', 123);
+echo "\n";
+
+// class has no private property 'aaa' so __set is invoked
+$bmw->aaa = 1;
+// class has private property 'hidden' so __set is invoked
+$bmw->hidden = "Hacked";
+// class has public property 'name' so __set is not invoked
+$bmw->name = "X8";
+echo "\n";
+
+// class has no private property 'aaa' so __get is not invoked
+echo $bmw->aaa . "\n";
+// class has private property 'hidden' so __get is invoked
+echo $bmw->hidden . "\n";
+// class has public property 'name' so __get is invoked
+echo $bmw->name . "\n";
+echo "\n";
+
+// class has private property 'hidden' so __isset is invoked
+var_dump(isset($bmw->hidden));
+// class has private property 'hidden' so __unset is invoked
+unset($bmw->hidden);
+var_dump(isset($bmw->hidden));
+echo "\n";
+
+// class has public property 'name' so __isset is not invoked
+var_dump(isset($bmw->name));
+// class has public property 'name' so __unset is not invoked
+unset($bmw->name);
+// Now 'name' property isn't set, that's why __isset is invoked to search it's private properties
+var_dump(isset($bmw->name));
+echo "\n";
+
+// serialize will invoke __sleep method
+echo(serialize($bmw));
+// unserialize will invoke __wakeup method
+// it will also invoke __destruct method 
+echo(unserialize(serialize($bmw)));
+echo "\n";
+
+// The __toString() method will be called when using echo method to print an object directly.
+echo $bmw;
+// When you try to call an object in the way of calling a function, the __invoke method will be called automatically.
+echo $bmw();
+echo "\n";
+
+// __set_state() method is called by var_export()
+$someCar = new Car('Some Name');
+$someCar->name = "Honda";
+eval('$b = ' . var_export($someCar, true) . ';');
+echo var_export($b);
+echo "\n";
+
+// __debugInfo() method is called by var_dump() when dumping an object to get the properties that should be shown
+var_dump(new Car("poll"));
+echo "\n";
+
+// __clone() method will be called when performing clone
+$fromSomeCar = clone $someCar;
+
 ```
 [🔝 Back to contents](#table-of-contents)

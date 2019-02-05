@@ -168,10 +168,10 @@ var_dump(isset($bmw->name));
 echo "\n";
 
 // serialize will invoke __sleep method
-echo(serialize($bmw));
+echo (serialize($bmw));
 // unserialize will invoke __wakeup method
 // it will also invoke __destruct method 
-echo(unserialize(serialize($bmw)));
+echo (unserialize(serialize($bmw)));
 echo "\n";
 
 // The __toString() method will be called when using echo method to print an object directly.
