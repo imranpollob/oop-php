@@ -442,7 +442,7 @@ class miniCar implements Car, Vehicle
 
 ### Polymorphism
 
-- Polymorphism represent more than one form, it can be achieved using method overloading and method overriding. This is an object oriented concept where same function can be used for different purposes. For example function name will remain same but it make take different number of arguments (overloading) and can do different task (overriding).
+- Polymorphism represent more than one form, it can be achieved using method overloading and method overriding. This is an object oriented concept where same function can be used for different purposes. For example function name will remain same but it may take different number of arguments (overloading) and can do different task (overriding).
 - PHP doesn't support traditional method overloading, however one way you might be able to achieve what you want, would be to make use of the __call magic method.
 
 ```php
@@ -621,7 +621,7 @@ class MyHelloWorld
     use Hello, World;
     public function sayExclamationMark()
     {
-        echo '!';
+        echo $this->sayHello();
     }
 }
 
